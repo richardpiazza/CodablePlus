@@ -1,6 +1,6 @@
 import Foundation
 
-public extension KeyedDecodingContainer {
+public extension KeyedDecodingContainerProtocol {
     /// Returns a Boolean value indicating whether the decoder contains a value
     /// associated with the any of the given keys.
     ///
@@ -12,16 +12,16 @@ public extension KeyedDecodingContainer {
     ///
     /// - parameter keys: The keys to search for.
     /// - returns: Whether the `Decoder` has an entry for any of the keys.
-    func contains(_ keys: [KeyedDecodingContainer<K>.Key]) -> Bool {
+    func contains(_ keys: [Key]) -> Bool {
         for key in keys {
             if contains(key) {
                 return true
             }
         }
-
+        
         return false
     }
-
+    
     /// Decodes a value of the given type for any of the given keys.
     ///
     /// This method will attempt to decode data in the order the keys are given.
@@ -35,7 +35,7 @@ public extension KeyedDecodingContainer {
     ///   one of the keys is not convertible to the requested type.
     /// - throws: `DecodingError.valueNotFound` if `self` has a null entry for all
     ///   of the given keys.
-    func decode<T>(_ type: T.Type, forKeys keys: [KeyedDecodingContainer<K>.Key]) throws -> T where T: Decodable {
+    func decode<T>(_ type: T.Type, forKeys keys: [Key]) throws -> T where T: Decodable {
         guard keys.count > 0 else {
             let context = DecodingError.Context(codingPath: [], debugDescription: "No Keys Specified")
             throw DecodingError.dataCorrupted(context)
@@ -63,7 +63,7 @@ public extension KeyedDecodingContainer {
     /// - throws: `DecodingError.dataCorrupted` if no keys are specified.
     /// - throws: `DecodingError.typeMismatch` if an encountered encoded value for
     ///   one of the keys is not convertible to the requested type.
-    func decodeIfPresent<T: Decodable>(_ type: T.Type, forKeys keys: [KeyedDecodingContainer<K>.Key]) throws -> T? {
+    func decodeIfPresent<T: Decodable>(_ type: T.Type, forKeys keys: [Key]) throws -> T? {
         guard keys.count > 0 else {
             let context = DecodingError.Context(codingPath: [], debugDescription: "No Keys Specified")
             throw DecodingError.dataCorrupted(context)
