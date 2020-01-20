@@ -13,7 +13,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Codable+",
+            name: "CodablePlus",
             targets: ["CodablePlus"]),
     ],
     dependencies: [
