@@ -20,7 +20,13 @@
 Codable+ is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
 
 ```swift
-let package = Package(    ...    dependencies: [        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "0.3.0")    ],    ...)
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "0.3.0")
+    ],
+    ...
+)
 ```
 
 Then import **Codable+** wherever you'd like to use it:
