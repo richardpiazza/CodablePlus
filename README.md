@@ -13,7 +13,7 @@
     </a>
 </p>
 
-<p align="center">A collection of extensions around the Swift `Codable` implementation.</p>
+<p align="center">A collection of extensions around the Swift <code>Codable</code> implementation.</p>
 
 ## Installation
 
