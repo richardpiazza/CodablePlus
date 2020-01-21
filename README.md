@@ -8,16 +8,30 @@
         <img src="https://img.shields.io/badge/swiftpm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
     </a>
      <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="Mac + Linux" />
-    <a href="https://twitter.com/johnsundell">
-        <img src="https://img.shields.io/badge/twitter-@johnsundell-blue.svg?style=flat" alt="Twitter: @johnsundell" />
+    <a href="https://twitter.com/richardpiazza">
+        <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
     </a>
 </p>
 
-A collection of extensions around the Swift `Codable` implementation.
+<p align="center">A collection of extensions around the Swift `Codable` implementation.</p>
 
-### Usage
+## Installation
 
-**Decoding/Encoding `Dictionary<String, Any>` & `Array<Any>`**
+Codable+ is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
+
+```swift
+let package = Package(    ...    dependencies: [        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "0.3.0")    ],    ...)
+```
+
+Then import **Codable+** wherever you'd like to use it:
+
+```swift
+import CodablePlus
+```
+
+## Usage
+
+### Decoding/Encoding `Dictionary<String, Any>` & `Array<Any>`
 
 The type `Any` in Swift does not conform to `Codable` because it can represent *any* type (whether codable or not). But, we run into situations where JSON objects are represented by a `Dictionary<String, Any>`, where *Any* here is limited to a set of known, codable-supporting types.
 
@@ -51,17 +65,17 @@ struct Container: Codable {
 
 ```json
 {
-    "dictionary": {
-        "aString": "This is a string.",
-        "aInt": 47,
-        "aDouble": 55.88,
-        "aBool": true,
-        "aArray": ["String", 123, 123.456, false],
-        "aDictionary": {
-            "name": "Bob",
-            "age": 69
-        }
-    }
+  "dictionary": {
+    "aString": "This is a string.",
+    "aInt": 47,
+    "aDouble": 55.88,
+    "aBool": true,
+    "aArray": ["String", 123, 123.456, false],
+    "aDictionary": {
+      "name": "Bob",
+      "age": 69
+    }
+  }
 }
 ```
 
@@ -81,7 +95,7 @@ As well as these containers, when composed of the same primitive types.
 
 * Dictionary
 
-**Decoding Multiple Keys**
+### Decoding Multiple Keys
 
 During active development of projects, often times an API spec will change, or could possibly be inconsistent from one endpoint to another. It would be handy if our Swift models could be consistent, but support decoding of multiple possible entity models. With **Codable+** this is possible.
 
@@ -131,44 +145,12 @@ let schema2json = """
 
 Notice the `companyName =` in the `init(from:)` method? This specifies multiple `CodingKey`s as possibilities. Now our `CompanyV2` model supports decoding of our `CompanyV1` schema.
 
-### Installation
+## Inspiration
 
-Codable+ is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
-
-```swift
-let package = Package(
-    ...
-    dependencies: [
-        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "0.3.0")
-    ],
-    ...
-)
-```
-
-Then import **Codable+** wherever you'd like to use it:
-
-```swift
-import CodablePlus
-```
-
-### Inspiration
-
-CodablePlus has grown and been inspired by several posts around the interwebs:
+**Codable+** has grown and been inspired by several posts around the interwebs:
 
 * [https://gist.github.com/mbuchetics/c9bc6c22033014aa0c550d3b4324411a](https://gist.github.com/mbuchetics/c9bc6c22033014aa0c550d3b4324411a)
 
 * [https://gist.github.com/loudmouth/332e8d89d8de2c1eaf81875cfcd22e24](https://gist.github.com/loudmouth/332e8d89d8de2c1eaf81875cfcd22e24)
 
 * [https://stackoverflow.com/questions/47575309/how-to-encode-a-property-with-type-of-json-dictionary-in-swift-4-encodable-proto](https://stackoverflow.com/questions/47575309/how-to-encode-a-property-with-type-of-json-dictionary-in-swift-4-encodable-proto)
-
-
-
-
-
-
-
-
-
-
-
-
