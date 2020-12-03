@@ -234,7 +234,9 @@ class ArrayEncodingDecodingTests: XCTestCase {
         }
 
         // swiftlint:disable line_length
-        XCTAssertEqual(json, "{\"activities\":[{\"Boxing\":\"Fun\"},{\"Brazilian Jiu Jitsu\":\"Awesome\"},{\"Swimming\":\"OK\"}],\"instructors\":[{\"Boxing\":\"Bob\"},{\"Brazilian Jiu Jitsu\":\"Mary\"},{\"Swimming\":\"Jim\"}]}")
+        let activitiesInstructors = "{\"activities\":[{\"Boxing\":\"Fun\"},{\"Brazilian Jiu Jitsu\":\"Awesome\"},{\"Swimming\":\"OK\"}],\"instructors\":[{\"Boxing\":\"Bob\"},{\"Brazilian Jiu Jitsu\":\"Mary\"},{\"Swimming\":\"Jim\"}]}"
+        let instructorsActivities = "{\"instructors\":[{\"Boxing\":\"Bob\"},{\"Brazilian Jiu Jitsu\":\"Mary\"},{\"Swimming\":\"Jim\"}],\"activities\":[{\"Boxing\":\"Fun\"},{\"Brazilian Jiu Jitsu\":\"Awesome\"},{\"Swimming\":\"OK\"}]}"
+        XCTAssertTrue(json == activitiesInstructors || json == instructorsActivities)
         // swiftlint:enable line_length
     }
 }
