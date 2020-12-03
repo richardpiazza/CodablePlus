@@ -1,23 +1,20 @@
 <p align="center">
-    <img src="CodablePlus.png" width="1000" max-width="90%" alt="CodablePlus" />
+    <img src="Resources/CodablePlus.png" width="1000" max-width="90%" alt="CodablePlus" />
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
-    <a href="https://swift.org/package-manager">
-        <img src="https://img.shields.io/badge/swiftpm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
-    </a>
-     <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="Mac + Linux" />
-    <a href="https://twitter.com/richardpiazza">
-        <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
-    </a>
+  <img src="https://github.com/richardpiazza/CodablePlus/workflows/Swift/badge.svg?branch=main" />
+  <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
+  <a href="https://twitter.com/richardpiazza">
+    <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
+  </a>
 </p>
 
 <p align="center">A collection of extensions around the Swift <code>Codable</code> implementation.</p>
 
 ## Installation
 
-Codable+ is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
+**Codable+** is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
 
 ```swift
 let package = Package(
