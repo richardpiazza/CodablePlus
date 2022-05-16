@@ -2,17 +2,6 @@ import XCTest
 @testable import CodablePlus
 
 class ArrayEncodingDecodingTests: XCTestCase {
-
-    static var allTests = [
-        ("testDecodingArray", testDecodingArray),
-        ("testEncodingArray", testEncodingArray),
-        ("testEncodeNull", testEncodeNull),
-        ("testDecodeNull", testDecodeNull),
-        ("testEncodeInvalid", testEncodeInvalid),
-        ("testEncodeSubArrays", testEncodeSubArrays),
-        ("testDecodeOptional", testDecodeOptional),
-        ("testEncodeOptional", testEncodeOptional),
-    ]
     
     fileprivate let decoder = JSONDecoder()
     fileprivate let encoder = JSONEncoder()

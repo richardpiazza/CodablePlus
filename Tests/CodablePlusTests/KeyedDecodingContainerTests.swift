@@ -3,12 +3,6 @@ import XCTest
 
 class KeyedDecodingContainerTests: XCTestCase {
     
-    static var allTests = [
-        ("testVersion1", testVersion1),
-        ("testVersion2", testVersion2),
-        ("testVersion2WithV1Data", testVersion2WithV1Data)
-    ]
-    
     let json1 = """
     {
         "name": "Apple",

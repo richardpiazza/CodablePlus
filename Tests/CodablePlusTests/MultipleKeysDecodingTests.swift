@@ -2,12 +2,6 @@ import XCTest
 @testable import CodablePlus
 
 class MultipleKeysDecodingTests: XCTestCase {
-
-    static var allTests = [
-        ("testSchema1", testSchema1),
-        ("testSchema2", testSchema2),
-        ("testSchema2WithSchema1Data", testSchema2WithSchema1Data),
-    ]
     
     fileprivate let decoder = JSONDecoder()
 
