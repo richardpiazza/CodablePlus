@@ -5,10 +5,10 @@ public extension KeyedDecodingContainerProtocol {
     ///
     /// The `defaultValue` will be returned in two conditions:
     /// * The `key` is not present in the container
-    /// * The standard `decode(_:,forKey:)` failes.
+    /// * The standard `decode(_:,forKey:)` fails.
     ///
     /// This function does not throw any errors. It is assumed that you would want the `defaultValue`
-    /// returned if errors are encountered. Decoding errors will be printed to the console.
+    /// returned if errors are encountered
     ///
     /// This produces a simplified api with type inference:
     /// ```swift
@@ -28,7 +28,6 @@ public extension KeyedDecodingContainerProtocol {
         do {
             return try decode(T.self, forKey: key)
         } catch {
-            print(error)
             return defaultValue()
         }
     }
