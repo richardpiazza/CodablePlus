@@ -1,36 +1,9 @@
-<p align="center">
-    <img src="Resources/CodablePlus.png" width="1000" max-width="90%" alt="CodablePlus" />
-</p>
+<img src="Resources/CodablePlus.png" width="1000" max-width="90%" alt="CodablePlus" />
 
-<p align="center">
-  <img src="https://github.com/richardpiazza/CodablePlus/workflows/Swift/badge.svg?branch=main" />
-  <img src="https://img.shields.io/badge/Swift-5.1-orange.svg" />
-  <a href="https://twitter.com/richardpiazza">
-    <img src="https://img.shields.io/badge/twitter-@richardpiazza-blue.svg?style=flat" alt="Twitter: @richardpiazza" />
-  </a>
-</p>
+A collection of extensions around the Swift `Codable` implementation.
 
-<p align="center">A collection of extensions around the Swift <code>Codable</code> implementation.</p>
-
-## Installation
-
-**Codable+** is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
-
-```swift
-let package = Package(
-    ...
-    dependencies: [
-        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "0.3.0")
-    ],
-    ...
-)
-```
-
-Then import **Codable+** wherever you'd like to use it:
-
-```swift
-import CodablePlus
-```
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Frichardpiazza%2FCodablePlus%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/richardpiazza/CodablePlus)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Frichardpiazza%2FCodablePlus%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/richardpiazza/CodablePlus)
 
 ## Usage
 
@@ -147,6 +120,26 @@ let schema2json = """
 ```
 
 Notice the `companyName =` in the `init(from:)` method? This specifies multiple `CodingKey`s as possibilities. Now our `CompanyV2` model supports decoding of our `CompanyV1` schema.
+
+## Installation
+
+**Codable+** is distributed using the [Swift Package Manager](https://swift.org/package-manager). To install it into a project, add it as a dependency within your `Package.swift` manifest:
+
+```swift
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/richardpiazza/CodablePlus.git", from: "1.0.0")
+    ],
+    ...
+)
+```
+
+Then import **Codable+** wherever you'd like to use it:
+
+```swift
+import CodablePlus
+```
 
 ## Inspiration
 

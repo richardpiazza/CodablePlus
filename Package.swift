@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,10 +6,11 @@ import PackageDescription
 let package = Package(
     name: "CodablePlus",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v10),
-        .tvOS(.v10),
-        .watchOS(.v3),
+        .macOS(.v12),
+        .macCatalyst(.v15),
+        .iOS(.v15),
+        .tvOS(.v15),
+        .watchOS(.v8)
     ],
     products: [
         .library(
