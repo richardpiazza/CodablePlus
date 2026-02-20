@@ -15,17 +15,17 @@ public extension KeyedEncodingContainerProtocol {
             try encode(primitive, forKey: key)
         case let primitive as String:
             try encode(primitive, forKey: key)
-        case let primitive as Dictionary<String, Any>:
+        case let primitive as [String: Any]:
             try encode(primitive, forKey: key)
-        case let primitive as Array<Bool>:
+        case let primitive as [Bool]:
             try encode(primitive, forKey: key)
-        case let primitive as Array<Int>:
+        case let primitive as [Int]:
             try encode(primitive, forKey: key)
-        case let primitive as Array<Double>:
+        case let primitive as [Double]:
             try encode(primitive, forKey: key)
-        case let primitive as Array<String>:
+        case let primitive as [String]:
             try encode(primitive, forKey: key)
-        case let primitive as Array<Any>:
+        case let primitive as [Any]:
             try encode(primitive, forKey: key)
         case is NSNull:
             try encodeNil(forKey: key)
@@ -34,16 +34,16 @@ public extension KeyedEncodingContainerProtocol {
             throw EncodingError.invalidValue(value, context)
         }
     }
-    
+
     /// Encodes the given value if present for the key.
     ///
     /// - parameter value: The value to encode.
     /// - throws: `EncodingError.invalidValue` if the given value is invalid in the current context for this format.
     mutating func encodeAnyIfPresent(_ value: Any?, forKey key: Key) throws {
-        guard let value = value else {
+        guard let value else {
             return
         }
-        
+
         try encodeAny(value, forKey: key)
     }
 }

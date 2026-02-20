@@ -13,9 +13,9 @@ public extension KeyedDecodingContainerProtocol {
             return doubleValue
         } else if let stringValue = try? decode(String.self, forKey: key) {
             return stringValue
-        } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self, forKey: key) {
+        } else if let nestedDictionary = try? decode([String: Any].self, forKey: key) {
             return nestedDictionary
-        } else if let nestedArray = try? decode(Array<Any>.self, forKey: key) {
+        } else if let nestedArray = try? decode([Any].self, forKey: key) {
             return nestedArray
         } else if try decodeNil(forKey: key) {
             return NSNull()
@@ -24,7 +24,7 @@ public extension KeyedDecodingContainerProtocol {
             throw DecodingError.dataCorrupted(context)
         }
     }
-    
+
     /// Decodes a value of any decodable type, if present.
     ///
     /// - parameter key: The key that the decoded value is associated with.
@@ -32,7 +32,7 @@ public extension KeyedDecodingContainerProtocol {
         guard contains(key) else {
             return nil
         }
-        
+
         return try decodeAny(forKey: key)
     }
 }

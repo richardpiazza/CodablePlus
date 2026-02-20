@@ -13,8 +13,8 @@ public extension KeyedDecodingContainerProtocol {
     ///   for the given key.
     /// - throws: `DecodingError.valueNotFound` if `self` has a null entry for
     ///   the given key.
-    func decode(_ type: Dictionary<String, Any>.Type, forKey key: Key) throws -> Dictionary<String, Any> {
-        let container = try self.nestedContainer(keyedBy: DictionaryKeys.self, forKey: key)
+    func decode(_ type: [String: Any].Type, forKey key: Key) throws -> [String: Any] {
+        let container = try nestedContainer(keyedBy: DictionaryKeys.self, forKey: key)
         return try container.decode(type)
     }
 
@@ -30,8 +30,8 @@ public extension KeyedDecodingContainerProtocol {
     ///   for the given key.
     /// - throws: `DecodingError.valueNotFound` if `self` has a null entry for
     ///   the given key.
-    func decode(_ type: Array<Any>.Type, forKey key: Key) throws -> Array<Any> {
-        var container = try self.nestedUnkeyedContainer(forKey: key)
+    func decode(_ type: [Any].Type, forKey key: Key) throws -> [Any] {
+        var container = try nestedUnkeyedContainer(forKey: key)
         return try container.decode(type)
     }
 
@@ -48,7 +48,7 @@ public extension KeyedDecodingContainerProtocol {
     ///   the value is a null value.
     /// - throws: `DecodingError.typeMismatch` if the encountered encoded value
     ///   is not convertible to the requested type.
-    func decodeIfPresent(_ type: Dictionary<String, Any>.Type, forKey key: Key) throws -> Dictionary<String, Any>? {
+    func decodeIfPresent(_ type: [String: Any].Type, forKey key: Key) throws -> [String: Any]? {
         guard contains(key) else {
             return nil
         }
@@ -69,7 +69,7 @@ public extension KeyedDecodingContainerProtocol {
     ///   the value is a null value.
     /// - throws: `DecodingError.typeMismatch` if the encountered encoded value
     ///   is not convertible to the requested type.
-    func decodeIfPresent(_ type: Array<Any>.Type, forKey key: Key) throws -> Array<Any>? {
+    func decodeIfPresent(_ type: [Any].Type, forKey key: Key) throws -> [Any]? {
         guard contains(key) else {
             return nil
         }
@@ -86,28 +86,28 @@ public extension KeyedDecodingContainerProtocol where Key == DictionaryKeys {
     ///   and convertible to the requested type.
     /// - throws: `DecodingError.typeMismatch` if the encountered encoded value
     ///   is not convertible to the requested type.
-    func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+    func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         var dictionary: [String: Any] = [:]
-        
+
         for key in allKeys {
             if let boolValue = try? decode(Bool.self, forKey: key) {
                 dictionary[key.stringValue] = boolValue
-                
+
             } else if let intValue = try? decode(Int.self, forKey: key) {
                 dictionary[key.stringValue] = intValue
-                
+
             } else if let doubleValue = try? decode(Double.self, forKey: key) {
                 dictionary[key.stringValue] = doubleValue
-                
+
             } else if let stringValue = try? decode(String.self, forKey: key) {
                 dictionary[key.stringValue] = stringValue
-                
-            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self, forKey: key) {
+
+            } else if let nestedDictionary = try? decode([String: Any].self, forKey: key) {
                 dictionary[key.stringValue] = nestedDictionary
-                
-            } else if let nestedArray = try? decode(Array<Any>.self, forKey: key) {
+
+            } else if let nestedArray = try? decode([Any].self, forKey: key) {
                 dictionary[key.stringValue] = nestedArray
-                
+
             } else if try decodeNil(forKey: key) {
                 dictionary[key.stringValue] = NSNull()
             } else {
@@ -115,7 +115,7 @@ public extension KeyedDecodingContainerProtocol where Key == DictionaryKeys {
                 throw DecodingError.typeMismatch(type, context)
             }
         }
-        
+
         return dictionary
     }
 }

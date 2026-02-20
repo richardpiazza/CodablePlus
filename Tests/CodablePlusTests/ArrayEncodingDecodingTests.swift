@@ -1,13 +1,13 @@
-import XCTest
 @testable import CodablePlus
+import XCTest
 
 class ArrayEncodingDecodingTests: XCTestCase {
-    
+
     fileprivate let decoder = JSONDecoder()
     fileprivate let encoder = JSONEncoder()
 
     func testDecodingArray() throws {
-        let data = arrayJSON.data(using: .utf8)!
+        let data = try XCTUnwrap(arrayJSON.data(using: .utf8))
         let catalog = try decoder.decode(Catalog.self, from: data)
 
         XCTAssertEqual(catalog.activities.count, 3)
@@ -34,7 +34,7 @@ class ArrayEncodingDecodingTests: XCTestCase {
         }
 
         XCTAssertEqual(coding["location"] as? String, "Everywhere")
-        XCTAssertEqual(coding["linesOfCode"] as? Int, 8327563)
+        XCTAssertEqual(coding["linesOfCode"] as? Int, 8_327_563)
     }
 
     func testEncodingArray() throws {
@@ -51,7 +51,7 @@ class ArrayEncodingDecodingTests: XCTestCase {
         var coding: [String: Any] = [:]
         coding["name"] = "Coding"
         coding["location"] = "Everywhere"
-        coding["linesOfCode"] = 8327563
+        coding["linesOfCode"] = 8_327_563
 
         let catalog = Catalog(activities: [swimming, reading, coding])
         let data = try encoder.encode(catalog)
@@ -92,7 +92,7 @@ class ArrayEncodingDecodingTests: XCTestCase {
             case "Coding":
                 XCTAssertEqual(location, "Everywhere")
                 let linesOfCode = activity["linesOfCode"] as? Int
-                XCTAssertEqual(linesOfCode, 8327563)
+                XCTAssertEqual(linesOfCode, 8_327_563)
             default:
                 XCTFail("Encoding or JSONSerialization failed.")
             }
@@ -128,7 +128,7 @@ class ArrayEncodingDecodingTests: XCTestCase {
     }
 
     func testDecodeNull() throws {
-        let data = arrayWithNullJSON.data(using: .utf8)!
+        let data = try XCTUnwrap(arrayWithNullJSON.data(using: .utf8))
         let catalog = try decoder.decode(Catalog.self, from: data)
 
         guard let activity = catalog.activities.first else {
@@ -140,9 +140,9 @@ class ArrayEncodingDecodingTests: XCTestCase {
         XCTAssertTrue(activity["location"] is NSNull)
     }
 
-    func testEncodeInvalid() {
+    func testEncodeInvalid() throws {
         var activity: [String: Any] = [:]
-        activity["url"] = URL(string: "https://www.google.com")!
+        activity["url"] = try XCTUnwrap(URL(string: "https://www.google.com"))
 
         let catalog = Catalog(activities: [activity])
         XCTAssertThrowsError(try encoder.encode(catalog))
@@ -188,7 +188,7 @@ class ArrayEncodingDecodingTests: XCTestCase {
     }
 
     func testDecodeOptional() throws {
-        let data = arrayWithInstructors.data(using: .utf8)!
+        let data = try XCTUnwrap(arrayWithInstructors.data(using: .utf8))
         let catalog = try decoder.decode(Catalog.self, from: data)
         XCTAssertFalse(catalog.activities.isEmpty)
         XCTAssertNotNil(catalog.instructors)

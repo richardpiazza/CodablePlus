@@ -18,10 +18,10 @@ public extension KeyedDecodingContainerProtocol {
                 return true
             }
         }
-        
+
         return false
     }
-    
+
     /// Decodes a value of the given type for any of the given keys.
     ///
     /// This method will attempt to decode data in the order the keys are given.
@@ -35,7 +35,7 @@ public extension KeyedDecodingContainerProtocol {
     ///   one of the keys is not convertible to the requested type.
     /// - throws: `DecodingError.valueNotFound` if `self` has a null entry for all
     ///   of the given keys.
-    func decode<T>(_ type: T.Type, forKeys keys: [Key]) throws -> T where T: Decodable {
+    func decode<T: Decodable>(_ type: T.Type, forKeys keys: [Key]) throws -> T {
         guard keys.count > 0 else {
             let context = DecodingError.Context(codingPath: [], debugDescription: "No Keys Specified")
             throw DecodingError.dataCorrupted(context)
@@ -70,7 +70,7 @@ public extension KeyedDecodingContainerProtocol {
         }
 
         for key in keys {
-            if let value = try self.decodeIfPresent(type, forKey: key) {
+            if let value = try decodeIfPresent(type, forKey: key) {
                 return value
             }
         }
