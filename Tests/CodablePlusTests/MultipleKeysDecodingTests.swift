@@ -1,12 +1,12 @@
-import XCTest
 @testable import CodablePlus
+import XCTest
 
 class MultipleKeysDecodingTests: XCTestCase {
-    
+
     fileprivate let decoder = JSONDecoder()
 
     func testSchema1() throws {
-        let data = schema1json.data(using: .utf8)!
+        let data = try XCTUnwrap(schema1json.data(using: .utf8))
         let company = try decoder.decode(CompanyV1.self, from: data)
 
         XCTAssertEqual(company.name, "Apple")
@@ -14,16 +14,16 @@ class MultipleKeysDecodingTests: XCTestCase {
     }
 
     func testSchema2() throws {
-        let data = schema2json.data(using: .utf8)!
+        let data = try XCTUnwrap(schema2json.data(using: .utf8))
         let company = try decoder.decode(CompanyV2.self, from: data)
 
         XCTAssertEqual(company.companyName, "Microsoft")
-        XCTAssertEqual(company.employees, 600000)
+        XCTAssertEqual(company.employees, 600_000)
         XCTAssertEqual(company.ceoName, "Satya Nadella")
     }
 
     func testSchema2WithSchema1Data() throws {
-        let data = schema1json.data(using: .utf8)!
+        let data = try XCTUnwrap(schema1json.data(using: .utf8))
         let company = try decoder.decode(CompanyV2.self, from: data)
 
         XCTAssertEqual(company.companyName, "Apple")

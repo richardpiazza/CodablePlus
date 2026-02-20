@@ -1,13 +1,13 @@
-import XCTest
 @testable import CodablePlus
+import XCTest
 
 class DictionaryEncodingDecodingTests: XCTestCase {
-    
+
     fileprivate let decoder = JSONDecoder()
     fileprivate let encoder = JSONEncoder()
 
     func testDecodingDictionary() throws {
-        let data = dictionaryJSON.data(using: .utf8)!
+        let data = try XCTUnwrap(dictionaryJSON.data(using: .utf8))
         let container = try decoder.decode(Container.self, from: data)
 
         let string = container.dictionary["aString"] as? String
@@ -111,23 +111,23 @@ class DictionaryEncodingDecodingTests: XCTestCase {
     }
 
     func testDecodeNull() throws {
-        let data = dictionaryWithNullJSON.data(using: .utf8)!
+        let data = try XCTUnwrap(dictionaryWithNullJSON.data(using: .utf8))
         let container = try decoder.decode(Container.self, from: data)
 
         XCTAssertTrue(container.dictionary["nullValue"] is NSNull)
         XCTAssertEqual(container.dictionary["nonNullValue"] as? Int, 47)
     }
 
-    func testEncodeInvalid() {
+    func testEncodeInvalid() throws {
         var containerDictionary: [String: Any] = [:]
-        containerDictionary["url"] = URL(string: "https://www.google.com")!
+        containerDictionary["url"] = try XCTUnwrap(URL(string: "https://www.google.com"))
 
         let container = Container(dictionary: containerDictionary)
         XCTAssertThrowsError(try encoder.encode(container))
     }
 
     func testDecodeSubarrays() throws {
-        let data = dictionaryWithSubArraysJSON.data(using: .utf8)!
+        let data = try XCTUnwrap(dictionaryWithSubArraysJSON.data(using: .utf8))
         let container = try decoder.decode(Container.self, from: data)
 
         guard let array = container.dictionary["container"] as? [Any] else {

@@ -20,7 +20,7 @@ public extension KeyedDecodingContainerProtocol {
     ///
     /// - parameter key: The key that the decoded value is associated with.
     /// - parameter defaultValue: Closure called to produce a value when needed.
-    func decode<T>(_ key: Key, defaultValue: @autoclosure () -> T) -> T where T: Decodable {
+    func decode<T: Decodable>(_ key: Key, defaultValue: @autoclosure () -> T) -> T {
         guard contains(key) else {
             return defaultValue()
         }
@@ -51,7 +51,7 @@ public extension KeyedDecodingContainerProtocol {
     ///
     /// - parameter keys: the keys that the given value may be associate with.
     /// - parameter defaultValue: Closure called to produce a value when needed.
-    func decode<T>(_ keys: [Key], defaultValue: @autoclosure () -> T) -> T where T: Decodable {
+    func decode<T: Decodable>(_ keys: [Key], defaultValue: @autoclosure () -> T) -> T {
         guard !keys.isEmpty else {
             return defaultValue()
         }
@@ -62,11 +62,8 @@ public extension KeyedDecodingContainerProtocol {
             }
 
             do {
-                let value = try decode(T.self, forKey: key)
-                return value
-            } catch {
-
-            }
+                return try decode(T.self, forKey: key)
+            } catch {}
         }
 
         return defaultValue()

@@ -8,11 +8,11 @@ public extension UnkeyedDecodingContainer {
     ///   and convertible to the requested type.
     /// - throws: `DecodingError.typeMismatch` if the encountered encoded value
     ///   is not convertible to the requested type.
-    mutating func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+    mutating func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         let container = try nestedContainer(keyedBy: DictionaryKeys.self)
         return try container.decode(type)
     }
-    
+
     /// Decodes a value of the given type.
     ///
     /// - parameter type: The type of value to decode.
@@ -20,9 +20,9 @@ public extension UnkeyedDecodingContainer {
     ///   and convertible to the requested type.
     /// - throws: `DecodingError.typeMismatch` if the encountered encoded value
     ///   is not convertible to the requested type.
-    mutating func decode(_ type: Array<Any>.Type) throws -> Array<Any> {
+    mutating func decode(_ type: [Any].Type) throws -> [Any] {
         var array: [Any] = []
-        
+
         while isAtEnd == false {
             if let value = try? decode(Bool.self) {
                 array.append(value)
@@ -32,17 +32,17 @@ public extension UnkeyedDecodingContainer {
                 array.append(value)
             } else if let value = try? decode(String.self) {
                 array.append(value)
-            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self) {
+            } else if let nestedDictionary = try? decode([String: Any].self) {
                 array.append(nestedDictionary)
-            } else if let nestedArray = try? decode(Array<Bool>.self) {
+            } else if let nestedArray = try? decode([Bool].self) {
                 array.append(nestedArray)
-            } else if let nestedArray = try? decode(Array<Int>.self) {
+            } else if let nestedArray = try? decode([Int].self) {
                 array.append(nestedArray)
-            } else if let nestedArray = try? decode(Array<Double>.self) {
+            } else if let nestedArray = try? decode([Double].self) {
                 array.append(nestedArray)
-            } else if let nestedArray = try? decode(Array<String>.self) {
+            } else if let nestedArray = try? decode([String].self) {
                 array.append(nestedArray)
-            } else if let nestedArray = try? decode(Array<Any>.self) {
+            } else if let nestedArray = try? decode([Any].self) {
                 array.append(nestedArray)
             } else if let _ = try? decodeNil() {
                 array.append(NSNull())
@@ -51,7 +51,7 @@ public extension UnkeyedDecodingContainer {
                 throw DecodingError.typeMismatch(type, context)
             }
         }
-        
+
         return array
     }
 }
